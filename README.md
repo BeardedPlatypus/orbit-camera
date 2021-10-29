@@ -1,2 +1,11 @@
 # unity-camera-package
-A simple camera package build with UniRx and Zenject.
+
+*this is a work-in-progress and will be updated further soon*
+
+A simple camera implementation build around CineMachine with UniRx.
+
+## Motivation
+
+## Dependencies
+
+* [UniRx](https://github.com/neuecc/UniRx)
