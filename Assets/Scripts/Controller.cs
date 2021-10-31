@@ -9,7 +9,7 @@ namespace BeardedPlatypus.Camera
     /// <summary>
     /// <see cref="Controller"/> the controller is responsible for controlling the
     /// provided <see cref="VirtualCameraTransform"/> based upon the provided
-    /// <see cref="IBindings"/> and <see cref="ISettings"/>.
+    /// <see cref="IBindings"/> and <see cref="Settings"/>.
     /// </summary>
     public sealed class Controller : IDisposable
     {
@@ -35,7 +35,7 @@ namespace BeardedPlatypus.Camera
             
             ConfigureSubscriptions();
         }
-        
+
         /// <summary>
         /// Gets the <see cref="Transform"/> of the Virtual Camera that is currently
         /// controlled by this <see cref="Controller"/>.
@@ -43,7 +43,7 @@ namespace BeardedPlatypus.Camera
         /// <remarks>
         /// If set to <c>null</c>, the controller will not update anything.
         /// </remarks>
-        [CanBeNull] public Transform VirtualCameraTransform { get; set; }
+        [CanBeNull] public Transform VirtualCameraTransform { get; set; } = null;
 
         private void ConfigureSubscriptions()
         {
@@ -68,23 +68,16 @@ namespace BeardedPlatypus.Camera
 
         private bool IsOrbitEnabled() => !(_settings.Orbit is null);
         
-        private void OnTranslate(Vector3 translation) { }
-        
-        private bool IsTranslateEnabled() => !(_settings.Translate is null);
-        
-        private void OnZoom(float zoomTranslation) { }
-        
-        private bool IsZoomEnabled() => !(_settings.Zoom is null);
-
         private float ClampRotation(float newRotation)
         {
             // The rotation will be applied negatively due to rotating around the local x axis.
             // As such we need to invert the rotation during this calculation.
             float rotation = -newRotation * Mathf.Deg2Rad;
             float currentRotation = CameraRotationAroundX();
-            
-            float clampedRotation = 
-                Mathf.Clamp(rotation, -currentRotation + 5F * Mathf.Deg2Rad, 0.5f * Mathf.PI - currentRotation);
+
+            float clampedRotation = Mathf.Clamp(rotation, 
+                                                -currentRotation + _settings.Orbit.RangeX.Min * Mathf.Deg2Rad, 
+                                                _settings.Orbit.RangeX.Max * Mathf.Deg2Rad - currentRotation);
 
             return -clampedRotation * Mathf.Rad2Deg;
         }
@@ -95,6 +88,14 @@ namespace BeardedPlatypus.Camera
             float distance = Vector3.Distance(position, Vector3.zero);
             return Mathf.Asin(position.y / distance);
         }
+        
+        private void OnTranslate(Vector3 translation) { }
+        
+        private bool IsTranslateEnabled() => !(_settings.Translate is null);
+        
+        private void OnZoom(float zoomTranslation) { }
+        
+        private bool IsZoomEnabled() => !(_settings.Zoom is null);
 
         public void Dispose()
         {
