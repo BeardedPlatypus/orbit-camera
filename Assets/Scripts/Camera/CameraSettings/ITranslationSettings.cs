@@ -1,6 +1,10 @@
 ﻿namespace BeardedPlatypus.Camera.CameraSettings
 {
-    public class ITranslationSettings
+    /// <summary>
+    /// <see cref="ITranslationSettings"/> defines the settings related to the
+    /// translation behaviour of the Camera.
+    /// </summary>
+    public interface ITranslationSettings
     {
         
     }
