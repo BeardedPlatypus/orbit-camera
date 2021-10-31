@@ -1,7 +1,10 @@
 ﻿namespace BeardedPlatypus.Camera.CameraSettings
 {
-    public class IZoomSettings
+    /// <summary>
+    /// <see cref="IZoomSettings"/> defines the settings related to the zoom behaviour
+    /// of the Camera.
+    /// </summary>
+    public interface IZoomSettings
     {
-        
     }
 }
