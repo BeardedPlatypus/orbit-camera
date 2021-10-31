@@ -1,6 +1,7 @@
-﻿using JetBrains.Annotations;
+﻿using BeardedPlatypus.Camera.SettingsComponents;
+using JetBrains.Annotations;
 
-namespace BeardedPlatypus.Camera.CameraSettings
+namespace BeardedPlatypus.Camera
 {
     /// <summary>
     /// <see cref="Settings"/> define the settings for each of the different

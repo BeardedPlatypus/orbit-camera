@@ -1,4 +1,4 @@
-﻿namespace BeardedPlatypus.Camera.CameraSettings
+﻿namespace BeardedPlatypus.Camera.SettingsComponents
 {
     /// <summary>
     /// <see cref="IZoomSettings"/> defines the settings related to the zoom behaviour

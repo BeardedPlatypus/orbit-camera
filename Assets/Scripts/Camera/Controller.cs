@@ -1,5 +1,4 @@
 using System;
-using BeardedPlatypus.Camera.CameraSettings;
 using JetBrains.Annotations;
 using UniRx;
 using UnityEngine;

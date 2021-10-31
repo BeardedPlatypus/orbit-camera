@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BeardedPlatypus.Camera.CameraSettings
+namespace BeardedPlatypus.Camera.SettingsComponents
 {
     /// <summary>
     /// <see cref="OrbitSettingsScriptableObject"/> provides the <see cref="IOrbitSettings"/>
