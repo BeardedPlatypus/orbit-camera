@@ -15,5 +15,5 @@ MonoBehaviour:
   factor: 0.05
   rangeXMin: -90
   rangeXMax: 90
-  rangeYMin: -180
-  rangeYMax: 180
+  rangeYMin: -10
+  rangeYMax: 10

@@ -54,40 +54,57 @@ namespace BeardedPlatypus.Camera
         private void OnOrbit(Vector2 inputTranslation)
         {
             if (!IsOrbitEnabled() || VirtualCameraTransform is null) return;
-            Vector2 rotation = inputTranslation * _settings.Orbit.Factor;
-
-            var orbitCenter = Vector3.zero;
-            var worldX = VirtualCameraTransform.TransformVector(Vector3.left);
-
-            float rotationAroundX = ClampRotation(rotation.y);
             
-            VirtualCameraTransform.RotateAround(orbitCenter, worldX, rotationAroundX);
-            VirtualCameraTransform.RotateAround(orbitCenter, Vector3.up, rotation.x);
+            Vector2 rotation = inputTranslation * _settings.Orbit.Factor;
+            var orbitCenter = Vector3.zero;
+
+            RotateX(rotation.y, orbitCenter);
+            RotateY(rotation.x, orbitCenter);
+        }
+
+        private void RotateX(float rotation, Vector3 orbitCenter)
+        {
+            var worldX = VirtualCameraTransform.TransformVector(Vector3.left);
+            var currentRotation = CalculateCameraRotationAroundX();
+            
+            // Note the negative sign of the newRotation, this is necessary to ensure we
+            // rotate in the same direction as the mouse movement.
+            float clampedRotation = Mathf.Clamp(-rotation * Mathf.Deg2Rad,
+                                                -currentRotation + _settings.Orbit.RangeX.Min * Mathf.Deg2Rad,
+                                                _settings.Orbit.RangeX.Max * Mathf.Deg2Rad - currentRotation) 
+                * -Mathf.Rad2Deg;
+            
+            VirtualCameraTransform.RotateAround(orbitCenter, worldX, clampedRotation);
+        }
+
+        private void RotateY(float rotation, Vector3 orbitCenter)
+        {
+            float _currentRotation = CalculateCameraRotationAroundY();
+            float min = -_currentRotation + _settings.Orbit.RangeY.Min;
+            float max = _settings.Orbit.RangeY.Max - _currentRotation;
+
+            float clampedRotation = Mathf.Clamp(rotation, min, max);
+            VirtualCameraTransform.RotateAround(orbitCenter, Vector3.up, clampedRotation);
         }
 
         private bool IsOrbitEnabled() => !(_settings.Orbit is null);
         
-        private float ClampRotation(float newRotation)
-        {
-            // The rotation will be applied negatively due to rotating around the local x axis.
-            // As such we need to invert the rotation during this calculation.
-            float rotation = -newRotation * Mathf.Deg2Rad;
-            float currentRotation = CameraRotationAroundX();
-
-            float clampedRotation = Mathf.Clamp(rotation, 
-                                                -currentRotation + _settings.Orbit.RangeX.Min * Mathf.Deg2Rad, 
-                                                _settings.Orbit.RangeX.Max * Mathf.Deg2Rad - currentRotation);
-
-            return -clampedRotation * Mathf.Rad2Deg;
-        }
-
-        private float CameraRotationAroundX()
+        private float CalculateCameraRotationAroundX()
         {
             Vector3 position = VirtualCameraTransform.position;
             float distance = Vector3.Distance(position, Vector3.zero);
             return Mathf.Asin(position.y / distance);
         }
-        
+
+        private float CalculateCameraRotationAroundY()
+        {
+            float rot = VirtualCameraTransform.rotation.eulerAngles.y;
+            // We evaluate the range between -180F and 180F, however
+            // The euler values will be reported between 0 - 360, as 
+            // such we need shift our scale.
+            return rot <= 180F ? rot : rot - 360.0F;
+        }
+
         private void OnTranslate(Vector3 translation) { }
         
         private bool IsTranslateEnabled() => !(_settings.Translate is null);

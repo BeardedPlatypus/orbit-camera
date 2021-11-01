@@ -29,12 +29,12 @@ namespace BeardedPlatypus.Camera.SettingsComponents
         /// <summary>
         /// The smallest allowed rotation around the y-axis in degrees.
         /// </summary>
-        [SerializeField] private float rangeYMin = -180.0F;
+        [SerializeField] private float rangeYMin = float.NegativeInfinity;
         
         /// <summary>
         /// The largest allowed rotation around the y-axis in degrees.
         /// </summary>
-        [SerializeField] private float rangeYMax = 180.0F;
+        [SerializeField] private float rangeYMax = float.PositiveInfinity;
 
         /// <inheritdoc cref="IOrbitSettings" />
         public float Factor => factor;
