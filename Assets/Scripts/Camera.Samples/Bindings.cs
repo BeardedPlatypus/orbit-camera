@@ -67,8 +67,8 @@ namespace BeardedPlatypus.Camera.Samples
 
         private void ConfigureZoomObservable()
         {
-            // TODO: Placeholder
-            Zoom = Observable.Empty<float>();
+            Zoom = _inputActions.Camera.Zoom.ActionAsObservable()
+                                            .Select(InterpretAs<float>);
         }
 
         private static T InterpretAs<T>(InputAction.CallbackContext context) where T : struct => 
