@@ -12,6 +12,7 @@ namespace BeardedPlatypus.Camera
     /// </summary>
     public sealed class Controller : IDisposable
     {
+        // TODO: Should we decompose the Orbit, Zoom, and Translation further?
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         
         // Currently, we assume the bindings and settings do never change.
@@ -34,6 +35,11 @@ namespace BeardedPlatypus.Camera
             
             ConfigureSubscriptions();
         }
+
+        /// <summary>
+        /// Gets the orbit center around which rotations occur.
+        /// </summary>
+        public Vector3 OrbitCenter { get; } = Vector3.zero;
 
         /// <summary>
         /// Gets the <see cref="Transform"/> of the Virtual Camera that is currently
@@ -108,8 +114,24 @@ namespace BeardedPlatypus.Camera
         private void OnTranslate(Vector3 translation) { }
         
         private bool IsTranslateEnabled() => !(_settings.Translate is null);
-        
-        private void OnZoom(float zoomTranslation) { }
+
+        private void OnZoom(float zoomTranslation)
+        {
+            if (!IsZoomEnabled() || VirtualCameraTransform is null) return;
+
+            float currDistance = Vector3.Distance(VirtualCameraTransform.position, OrbitCenter);
+            float minTranslationDistance = _settings.Zoom.Range.Min - currDistance;
+            float maxTranslationDistance = _settings.Zoom.Range.Max - currDistance;
+            float inputTranslation = -zoomTranslation * _settings.Zoom.Factor;
+
+            float translation = Mathf.Clamp(
+                inputTranslation,
+                minTranslationDistance,
+                maxTranslationDistance
+            );
+            
+            VirtualCameraTransform.Translate(new Vector3(0F, 0F, -translation));
+        }
         
         private bool IsZoomEnabled() => !(_settings.Zoom is null);
 
