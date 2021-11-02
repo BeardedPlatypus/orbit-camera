@@ -9,3 +9,4 @@ A simple camera implementation build around CineMachine with UniRx.
 ## Dependencies
 
 * [UniRx](https://github.com/neuecc/UniRx)
+* [Zenject](https://github.com/modesttree/Zenject)
