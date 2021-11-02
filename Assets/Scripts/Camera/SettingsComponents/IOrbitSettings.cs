@@ -25,7 +25,8 @@
         /// </summary>
         /// <remarks>
         /// It is expected that RangeX.Min is smaller than RangeX.Max, and that the
-        /// these values are between -180 and 180 degrees.
+        /// these values are either negative and positive infinity or between
+        /// -180 and 180 degrees.
         /// </remarks>
         public (float Min, float Max) RangeY { get; }
     }
