@@ -39,18 +39,18 @@ namespace BeardedPlatypus.Camera.Samples
 
         private void ConfigureObservables()
         {
-            ConfigureOrbitObservable();
-            ConfigureTranslateObservable();
-            ConfigureZoomObservable();
-        }
-        
-        private void ConfigureOrbitObservable()
-        {
-
             IObservable<Vector2> dragStream = _inputActions.Camera.Drag.ActionAsObservable()
                 .Select(InterpretAs<Vector2>);
 
-            var isOrbitingStream = _inputActions.Camera.OrbitActive.ActionAsObservable()
+            ConfigureOrbitObservable(dragStream);
+            ConfigureTranslateObservable(dragStream);
+            ConfigureZoomObservable();
+        }
+        
+        private void ConfigureOrbitObservable(IObservable<Vector2> dragStream)
+        {
+
+            IObservable<bool> isOrbitingStream = _inputActions.Camera.OrbitActive.ActionAsObservable()
                 .Select(InterpretAsBool)
                 .DistinctUntilChanged();
 
@@ -59,11 +59,27 @@ namespace BeardedPlatypus.Camera.Samples
                 .Select(x => x.direction);
         }
 
-        private void ConfigureTranslateObservable()
+        private void ConfigureTranslateObservable(IObservable<Vector2> dragStream)
         {
-            // TODO: Placeholder
-            Translate = Observable.Empty<Vector3>();
+            IObservable<bool> isTranslatingStream = _inputActions.Camera.TranslateActive.ActionAsObservable()
+                .Select(InterpretAsBool)
+                .DistinctUntilChanged();
+
+            IObservable<bool> isAlternativeStream = _inputActions.Camera.TranslateAlt.ActionAsObservable()
+                .Select(InterpretAsBool)
+                .StartWith(false)
+                .DistinctUntilChanged();
+
+            Translate = isAlternativeStream
+                .CombineLatest(dragStream, ToTranslation)
+                .CombineLatest(isTranslatingStream, (translation, isActive) => (isActive, translation))
+                .Where(x => x.isActive)
+                .Select(x => x.translation);
         }
+
+        private static Vector3 ToTranslation(bool isAlt, Vector2 dragDirection) =>
+            isAlt ? new Vector3(dragDirection.x, dragDirection.y, 0F)
+                  : new Vector3(dragDirection.x, 0F, dragDirection.y);
 
         private void ConfigureZoomObservable()
         {
