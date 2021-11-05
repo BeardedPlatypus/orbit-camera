@@ -39,7 +39,7 @@ namespace BeardedPlatypus.Camera
         /// <summary>
         /// Gets the orbit center around which rotations occur.
         /// </summary>
-        public Vector3 OrbitCenter { get; } = Vector3.zero;
+        public Vector3 OrbitCenter { get; private set; } = Vector3.zero;
 
         /// <summary>
         /// Gets the <see cref="Transform"/> of the Virtual Camera that is currently
@@ -111,7 +111,30 @@ namespace BeardedPlatypus.Camera
             return rot <= 180F ? rot : rot - 360.0F;
         }
 
-        private void OnTranslate(Vector3 translation) { }
+        private void OnTranslate(Vector3 translation)
+        {
+            if (!IsTranslateEnabled() || VirtualCameraTransform is null) return;
+            
+            Vector3 localComponents = new Vector3(translation.x, 0F, translation.z) * _settings.Translate.Factor;
+            Vector3 worldComponents = 
+                VirtualCameraTransform.TransformVector(localComponents) + 
+                new Vector3(0F, translation.y * _settings.Translate.Factor, 0F);
+
+            // TODO: Remove this code duplication
+            float xMin = _settings.Translate.RangeX.Min - OrbitCenter.x;
+            float xMax = _settings.Translate.RangeX.Max - OrbitCenter.x;
+            float yMin = _settings.Translate.RangeY.Min - OrbitCenter.y;
+            float yMax = _settings.Translate.RangeY.Max - OrbitCenter.y;
+            float zMin = _settings.Translate.RangeZ.Min - OrbitCenter.z;
+            float zMax = _settings.Translate.RangeZ.Max - OrbitCenter.z;
+
+            Vector3 clampedComponents = new Vector3(Mathf.Clamp(worldComponents.x, xMin, xMax),
+                                                    Mathf.Clamp(worldComponents.y, yMin, yMax),
+                                                    Mathf.Clamp(worldComponents.z, zMin, zMax));
+
+            OrbitCenter += clampedComponents;
+            VirtualCameraTransform.Translate(clampedComponents);
+        }
         
         private bool IsTranslateEnabled() => !(_settings.Translate is null);
 
