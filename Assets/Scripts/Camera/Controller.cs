@@ -115,10 +115,10 @@ namespace BeardedPlatypus.Camera
         {
             if (!IsTranslateEnabled() || VirtualCameraTransform is null) return;
             
-            Vector3 localComponents = new Vector3(translation.x, 0F, translation.z) * _settings.Translate.Factor;
+            Vector3 localComponents = new Vector3(-translation.x * _settings.Translate.Factor, 0F, 0F);
             Vector3 worldComponents = 
                 VirtualCameraTransform.TransformVector(localComponents) + 
-                new Vector3(0F, translation.y * _settings.Translate.Factor, 0F);
+                new Vector3(0F, translation.y, -translation.z) * _settings.Translate.Factor;
 
             // TODO: Remove this code duplication
             float xMin = _settings.Translate.RangeX.Min - OrbitCenter.x;
@@ -133,7 +133,7 @@ namespace BeardedPlatypus.Camera
                                                     Mathf.Clamp(worldComponents.z, zMin, zMax));
 
             OrbitCenter += clampedComponents;
-            VirtualCameraTransform.Translate(clampedComponents);
+            VirtualCameraTransform.Translate(clampedComponents, Space.World);
         }
         
         private bool IsTranslateEnabled() => !(_settings.Translate is null);
