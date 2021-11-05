@@ -13,7 +13,7 @@ namespace BeardedPlatypus.Camera.SettingsComponents
         /// <summary>
         /// The orbit factor with which orbiting rotation is scaled.
         /// </summary>
-        [SerializeField] private float factor = 0.05F;
+        [SerializeField] private float factor = 0.005F;
         
         /// <summary>
         /// The smallest allowed position on the y-axis.
