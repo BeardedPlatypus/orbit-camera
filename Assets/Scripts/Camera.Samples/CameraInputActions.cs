@@ -27,6 +27,22 @@ public class @CameraInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""TranslateActive"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ed9fb926-f540-4644-925b-5d77fcd61d9a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""TranslateAlt"",
+                    ""type"": ""Button"",
+                    ""id"": ""487972e7-1353-4ef3-9cb6-237cab0973ed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Drag"",
                     ""type"": ""PassThrough"",
                     ""id"": ""ef8c02c8-650d-4113-ae8e-df304ddbf3b1"",
@@ -76,6 +92,28 @@ public class @CameraInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1694a49-2b83-419f-a972-c06e042845b5"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateAlt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d65d7c9a-d06a-4cd1-ade8-629c7ef4ef6a"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateActive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -85,6 +123,8 @@ public class @CameraInputActions : IInputActionCollection, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_OrbitActive = m_Camera.FindAction("OrbitActive", throwIfNotFound: true);
+        m_Camera_TranslateActive = m_Camera.FindAction("TranslateActive", throwIfNotFound: true);
+        m_Camera_TranslateAlt = m_Camera.FindAction("TranslateAlt", throwIfNotFound: true);
         m_Camera_Drag = m_Camera.FindAction("Drag", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
     }
@@ -137,6 +177,8 @@ public class @CameraInputActions : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Camera;
     private ICameraActions m_CameraActionsCallbackInterface;
     private readonly InputAction m_Camera_OrbitActive;
+    private readonly InputAction m_Camera_TranslateActive;
+    private readonly InputAction m_Camera_TranslateAlt;
     private readonly InputAction m_Camera_Drag;
     private readonly InputAction m_Camera_Zoom;
     public struct CameraActions
@@ -144,6 +186,8 @@ public class @CameraInputActions : IInputActionCollection, IDisposable
         private @CameraInputActions m_Wrapper;
         public CameraActions(@CameraInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @OrbitActive => m_Wrapper.m_Camera_OrbitActive;
+        public InputAction @TranslateActive => m_Wrapper.m_Camera_TranslateActive;
+        public InputAction @TranslateAlt => m_Wrapper.m_Camera_TranslateAlt;
         public InputAction @Drag => m_Wrapper.m_Camera_Drag;
         public InputAction @Zoom => m_Wrapper.m_Camera_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
@@ -158,6 +202,12 @@ public class @CameraInputActions : IInputActionCollection, IDisposable
                 @OrbitActive.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnOrbitActive;
                 @OrbitActive.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnOrbitActive;
                 @OrbitActive.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnOrbitActive;
+                @TranslateActive.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnTranslateActive;
+                @TranslateActive.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnTranslateActive;
+                @TranslateActive.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnTranslateActive;
+                @TranslateAlt.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnTranslateAlt;
+                @TranslateAlt.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnTranslateAlt;
+                @TranslateAlt.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnTranslateAlt;
                 @Drag.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnDrag;
                 @Drag.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnDrag;
                 @Drag.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnDrag;
@@ -171,6 +221,12 @@ public class @CameraInputActions : IInputActionCollection, IDisposable
                 @OrbitActive.started += instance.OnOrbitActive;
                 @OrbitActive.performed += instance.OnOrbitActive;
                 @OrbitActive.canceled += instance.OnOrbitActive;
+                @TranslateActive.started += instance.OnTranslateActive;
+                @TranslateActive.performed += instance.OnTranslateActive;
+                @TranslateActive.canceled += instance.OnTranslateActive;
+                @TranslateAlt.started += instance.OnTranslateAlt;
+                @TranslateAlt.performed += instance.OnTranslateAlt;
+                @TranslateAlt.canceled += instance.OnTranslateAlt;
                 @Drag.started += instance.OnDrag;
                 @Drag.performed += instance.OnDrag;
                 @Drag.canceled += instance.OnDrag;
@@ -184,6 +240,8 @@ public class @CameraInputActions : IInputActionCollection, IDisposable
     public interface ICameraActions
     {
         void OnOrbitActive(InputAction.CallbackContext context);
+        void OnTranslateActive(InputAction.CallbackContext context);
+        void OnTranslateAlt(InputAction.CallbackContext context);
         void OnDrag(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
     }

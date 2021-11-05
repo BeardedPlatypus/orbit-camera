@@ -14,6 +14,22 @@
                     "interactions": ""
                 },
                 {
+                    "name": "TranslateActive",
+                    "type": "PassThrough",
+                    "id": "ed9fb926-f540-4644-925b-5d77fcd61d9a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TranslateAlt",
+                    "type": "Button",
+                    "id": "487972e7-1353-4ef3-9cb6-237cab0973ed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Drag",
                     "type": "PassThrough",
                     "id": "ef8c02c8-650d-4113-ae8e-df304ddbf3b1",
@@ -61,6 +77,28 @@
                     "processors": "Normalize(min=-1,max=1)",
                     "groups": "",
                     "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1694a49-2b83-419f-a972-c06e042845b5",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateAlt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d65d7c9a-d06a-4cd1-ade8-629c7ef4ef6a",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateActive",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
