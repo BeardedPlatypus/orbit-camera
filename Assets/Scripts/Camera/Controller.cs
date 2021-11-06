@@ -115,10 +115,17 @@ namespace BeardedPlatypus.Camera
         {
             if (!IsTranslateEnabled() || VirtualCameraTransform is null) return;
             
-            Vector3 localComponents = new Vector3(-translation.x * _settings.Translate.Factor, 0F, 0F);
-            Vector3 worldComponents = 
-                VirtualCameraTransform.TransformVector(localComponents) + 
-                new Vector3(0F, translation.y, -translation.z) * _settings.Translate.Factor;
+            Vector3 xComponent = VirtualCameraTransform.TransformVector(
+                new Vector3(-translation.x * _settings.Translate.Factor, 0F, 0F));
+            Vector3 yComponent = 
+                new Vector3(0F, translation.y * _settings.Translate.Factor);
+            
+            Vector3 zComponent = VirtualCameraTransform.TransformVector(new Vector3(0F, 1F, 1F));
+            zComponent.y = 0F;
+            zComponent.Normalize();
+            zComponent *= (_settings.Translate.Factor * -translation.z);
+
+            Vector3 worldComponents = xComponent + yComponent + zComponent;
 
             // TODO: Remove this code duplication
             float xMin = _settings.Translate.RangeX.Min - OrbitCenter.x;
