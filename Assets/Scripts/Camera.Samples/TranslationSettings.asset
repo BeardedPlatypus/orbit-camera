@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d423beec1d428ea19ec64c20b68005, type: 3}
   m_Name: TranslationSettings
   m_EditorClassIdentifier: 
+  factor: 0.005
+  rangeXMin: -5
+  rangeXMax: 5
+  rangeYMin: -5
+  rangeYMax: 5
+  rangeZMin: -5
+  rangeZMax: 5
