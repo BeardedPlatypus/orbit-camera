@@ -8,38 +8,48 @@ namespace BeardedPlatypus.Camera.Core
     /// <summary>
     /// <see cref="Controller"/> the controller is responsible for controlling the
     /// provided <see cref="VirtualCameraTransform"/> based upon the provided
-    /// <see cref="IBindings"/> and <see cref="Settings"/>.
+    /// <see cref="IBindings"/> and behaviours.
     /// </summary>
     public sealed class Controller : IDisposable
     {
         // TODO: Should we decompose the Orbit, Zoom, and Translation further?
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         
-        // Currently, we assume the bindings and settings do never change.
+        // Currently, we assume the bindings and behaviours do never change.
         private readonly IBindings _bindings;
-        private readonly Settings _settings;
+        private readonly IOrbitCenter _orbitCenter;
 
+        [CanBeNull] private readonly IOrbitBehaviour _orbitBehaviour;
+        [CanBeNull] private readonly ITranslateBehaviour _translateBehaviour;
+        [CanBeNull] private readonly IZoomBehaviour _zoomBehaviour;
+        
         /// <summary>
-        /// Construct a new <see cref="Controller"/> with the given parameters.
+        /// Creates a new <see cref="Controller"/> with the given dependencies.
         /// </summary>
-        /// <param name="bindings">
-        /// The bindings which provide the input for the controller.
-        /// </param>
-        /// <param name="settings">
-        /// The settings which provide the behaviour definition of the controller.
-        /// </param>
-        public Controller(IBindings bindings, Settings settings)
+        /// <param name="bindings">The bindings containing the reactive streams.</param>
+        /// <param name="orbitCenter">The orbit center around which we orbit.</param>
+        /// <param name="orbitBehaviour">Optional orbit behaviour.</param>
+        /// <param name="translateBehaviour">Optional translate behaviour</param>
+        /// <param name="zoomBehaviour">Optional zoom behaviour</param>
+        /// <remarks>
+        /// If any of the behaviours is set to <c>null</c>, the reactive streams
+        /// will be ignored.
+        /// </remarks>
+        public Controller(IBindings bindings, 
+                          IOrbitCenter orbitCenter,
+                          [CanBeNull] IOrbitBehaviour orbitBehaviour,
+                          [CanBeNull] ITranslateBehaviour translateBehaviour,
+                          [CanBeNull] IZoomBehaviour zoomBehaviour)
         {
             _bindings = bindings;
-            _settings = settings;
+            _orbitCenter = orbitCenter;
+            
+            _orbitBehaviour = orbitBehaviour;
+            _translateBehaviour = translateBehaviour;
+            _zoomBehaviour = zoomBehaviour;
             
             ConfigureSubscriptions();
         }
-
-        /// <summary>
-        /// Gets the orbit center around which rotations occur.
-        /// </summary>
-        public Vector3 OrbitCenter { get; private set; } = Vector3.zero;
 
         /// <summary>
         /// Gets the <see cref="Transform"/> of the Virtual Camera that is currently
@@ -60,114 +70,34 @@ namespace BeardedPlatypus.Camera.Core
         private void OnOrbit(Vector2 inputTranslation)
         {
             if (!IsOrbitEnabled() || VirtualCameraTransform is null) return;
-            
-            Vector2 rotation = inputTranslation * _settings.Orbit.Factor;
-            var orbitCenter = Vector3.zero;
-
-            RotateX(rotation.y, orbitCenter);
-            RotateY(rotation.x, orbitCenter);
+            _orbitBehaviour!.OnOrbit(inputTranslation, 
+                                    _orbitCenter, 
+                                    VirtualCameraTransform);
         }
 
-        private void RotateX(float rotation, Vector3 orbitCenter)
-        {
-            var worldX = VirtualCameraTransform.TransformVector(Vector3.left);
-            var currentRotation = CalculateCameraRotationAroundX();
-            
-            // Note the negative sign of the newRotation, this is necessary to ensure we
-            // rotate in the same direction as the mouse movement.
-            float clampedRotation = Mathf.Clamp(-rotation * Mathf.Deg2Rad,
-                                                -currentRotation + _settings.Orbit.RangeX.Min * Mathf.Deg2Rad,
-                                                _settings.Orbit.RangeX.Max * Mathf.Deg2Rad - currentRotation) 
-                * -Mathf.Rad2Deg;
-            
-            VirtualCameraTransform.RotateAround(orbitCenter, worldX, clampedRotation);
-        }
-
-        private void RotateY(float rotation, Vector3 orbitCenter)
-        {
-            float _currentRotation = CalculateCameraRotationAroundY();
-            float min = -_currentRotation + _settings.Orbit.RangeY.Min;
-            float max = _settings.Orbit.RangeY.Max - _currentRotation;
-
-            float clampedRotation = Mathf.Clamp(rotation, min, max);
-            VirtualCameraTransform.RotateAround(orbitCenter, Vector3.up, clampedRotation);
-        }
-
-        private bool IsOrbitEnabled() => !(_settings.Orbit is null);
+        private bool IsOrbitEnabled() => !(_orbitBehaviour is null);
         
-        private float CalculateCameraRotationAroundX()
-        {
-            Vector3 position = VirtualCameraTransform.position;
-            float distance = Vector3.Distance(position, Vector3.zero);
-            return Mathf.Asin(position.y / distance);
-        }
-
-        private float CalculateCameraRotationAroundY()
-        {
-            float rot = VirtualCameraTransform.rotation.eulerAngles.y;
-            // We evaluate the range between -180F and 180F, however
-            // The euler values will be reported between 0 - 360, as 
-            // such we need shift our scale.
-            return rot <= 180F ? rot : rot - 360.0F;
-        }
-
-        private void OnTranslate(Vector3 translation)
+        private void OnTranslate(Vector3 inputTranslation)
         {
             if (!IsTranslateEnabled() || VirtualCameraTransform is null) return;
-            
-            Vector3 xComponent = VirtualCameraTransform.TransformVector(
-                new Vector3(-translation.x * _settings.Translate.Factor, 0F, 0F));
-            Vector3 yComponent = 
-                new Vector3(0F, translation.y * _settings.Translate.Factor);
-            
-            Vector3 zComponent = VirtualCameraTransform.TransformVector(new Vector3(0F, 1F, 1F));
-            zComponent.y = 0F;
-            zComponent.Normalize();
-            zComponent *= (_settings.Translate.Factor * -translation.z);
-
-            Vector3 worldComponents = xComponent + yComponent + zComponent;
-
-            // TODO: Remove this code duplication
-            float xMin = _settings.Translate.RangeX.Min - OrbitCenter.x;
-            float xMax = _settings.Translate.RangeX.Max - OrbitCenter.x;
-            float yMin = _settings.Translate.RangeY.Min - OrbitCenter.y;
-            float yMax = _settings.Translate.RangeY.Max - OrbitCenter.y;
-            float zMin = _settings.Translate.RangeZ.Min - OrbitCenter.z;
-            float zMax = _settings.Translate.RangeZ.Max - OrbitCenter.z;
-
-            Vector3 clampedComponents = new Vector3(Mathf.Clamp(worldComponents.x, xMin, xMax),
-                                                    Mathf.Clamp(worldComponents.y, yMin, yMax),
-                                                    Mathf.Clamp(worldComponents.z, zMin, zMax));
-
-            OrbitCenter += clampedComponents;
-            VirtualCameraTransform.Translate(clampedComponents, Space.World);
+            _translateBehaviour!.OnTranslate(inputTranslation, 
+                                            _orbitCenter, 
+                                            VirtualCameraTransform);
         }
         
-        private bool IsTranslateEnabled() => !(_settings.Translate is null);
+        private bool IsTranslateEnabled() => !(_translateBehaviour is null);
 
         private void OnZoom(float zoomTranslation)
         {
             if (!IsZoomEnabled() || VirtualCameraTransform is null) return;
-
-            float currDistance = Vector3.Distance(VirtualCameraTransform.position, OrbitCenter);
-            float minTranslationDistance = _settings.Zoom.Range.Min - currDistance;
-            float maxTranslationDistance = _settings.Zoom.Range.Max - currDistance;
-            float inputTranslation = -zoomTranslation * _settings.Zoom.Factor;
-
-            float translation = Mathf.Clamp(
-                inputTranslation,
-                minTranslationDistance,
-                maxTranslationDistance
-            );
-            
-            VirtualCameraTransform.Translate(new Vector3(0F, 0F, -translation));
+            _zoomBehaviour!.OnZoom(zoomTranslation, 
+                                  _orbitCenter, 
+                                  VirtualCameraTransform);
         }
         
-        private bool IsZoomEnabled() => !(_settings.Zoom is null);
+        private bool IsZoomEnabled() => !(_zoomBehaviour is null);
 
-        public void Dispose()
-        {
-            _disposable?.Dispose();
-        }
+        /// <inheritdoc cref="IDisposable.Dispose"/>
+        public void Dispose() => _disposable?.Dispose();
     }
 }
