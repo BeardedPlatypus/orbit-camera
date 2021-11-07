@@ -1,3 +1,4 @@
+using BeardedPlatypus.Camera.Core;
 using Zenject;
 
 namespace BeardedPlatypus.Camera.Zenject

@@ -1,4 +1,5 @@
-using BeardedPlatypus.Camera.SettingsComponents;
+using BeardedPlatypus.Camera.Core;
+using BeardedPlatypus.Camera.Core.SettingsComponents;
 using UnityEngine;
 using Zenject;
 

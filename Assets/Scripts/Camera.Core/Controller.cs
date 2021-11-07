@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using UniRx;
 using UnityEngine;
 
-namespace BeardedPlatypus.Camera
+namespace BeardedPlatypus.Camera.Core
 {
     /// <summary>
     /// <see cref="Controller"/> the controller is responsible for controlling the

@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using BeardedPlatypus.Camera.Core;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -12,10 +13,10 @@ namespace BeardedPlatypus.Camera.Samples
     /// </summary>
     public sealed class ControllerBehaviour : MonoBehaviour
     {
-        private Camera.Controller _controller;
+        private Controller _controller;
         
         [Inject]
-        private void Init(Camera.Controller controller)
+        private void Init(Controller controller)
         {
             _controller = controller;
         }

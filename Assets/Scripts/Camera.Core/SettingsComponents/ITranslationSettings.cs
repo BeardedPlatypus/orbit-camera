@@ -1,4 +1,4 @@
-﻿namespace BeardedPlatypus.Camera.SettingsComponents
+﻿namespace BeardedPlatypus.Camera.Core.SettingsComponents
 {
     /// <summary>
     /// <see cref="ITranslationSettings"/> defines the settings related to the

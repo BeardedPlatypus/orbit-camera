@@ -2,7 +2,7 @@ using System;
 using UniRx;
 using UnityEngine.InputSystem;
 
-namespace BeardedPlatypus.Camera
+namespace BeardedPlatypus.Camera.Core
 {
     /// <summary>
     /// <see cref="InputActionExtensions"/> provides extensions for <see cref="InputAction"/>

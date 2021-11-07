@@ -1,4 +1,5 @@
 using System;
+using BeardedPlatypus.Camera.Core;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +11,7 @@ namespace BeardedPlatypus.Camera.Samples
     /// <see cref="Bindings"/> implements the boilerplate to connect the InputActions
     /// to the <see cref="IBindings"/> interface.
     /// </summary>
-    public sealed class Bindings : MonoBehaviour, Camera.IBindings
+    public sealed class Bindings : MonoBehaviour, IBindings
     {
         private CameraInputActions _inputActions;
  

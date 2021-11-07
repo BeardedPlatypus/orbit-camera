@@ -1,3 +1,4 @@
+using BeardedPlatypus.Camera.Core;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
