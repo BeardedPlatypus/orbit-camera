@@ -7,7 +7,7 @@ namespace BeardedPlatypus.Camera.Zenject
     /// <see cref="CameraControllerInstaller"/> provides the <see cref="Controller"/>
     /// dependency.
     /// </summary>
-    public class CameraControllerInstaller : MonoInstaller
+    public sealed class CameraControllerInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
