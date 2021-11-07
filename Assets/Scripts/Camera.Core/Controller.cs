@@ -37,9 +37,9 @@ namespace BeardedPlatypus.Camera.Core
         /// </remarks>
         public Controller(IBindings bindings, 
                           IOrbitCenter orbitCenter,
-                          [CanBeNull] IOrbitBehaviour orbitBehaviour,
-                          [CanBeNull] ITranslateBehaviour translateBehaviour,
-                          [CanBeNull] IZoomBehaviour zoomBehaviour)
+                          [CanBeNull] IOrbitBehaviour orbitBehaviour = null,
+                          [CanBeNull] ITranslateBehaviour translateBehaviour = null,
+                          [CanBeNull] IZoomBehaviour zoomBehaviour = null)
         {
             _bindings = bindings;
             _orbitCenter = orbitCenter;
