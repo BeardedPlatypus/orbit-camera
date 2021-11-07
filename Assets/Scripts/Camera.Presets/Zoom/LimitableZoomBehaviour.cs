@@ -1,7 +1,7 @@
 ﻿using BeardedPlatypus.Camera.Core;
 using UnityEngine;
 
-namespace Camera.Presets.Zoom
+namespace BeardedPlatypus.Camera.Presets.Zoom
 {
     /// <summary>
     /// <see cref="LimitableZoomBehaviour"/> implements the <see cref="IZoomBehaviour"/>

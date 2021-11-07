@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Camera.Presets.Translate
+namespace BeardedPlatypus.Camera.Presets.Translate
 {
     /// <summary>
     /// <see cref="ILimitableTranslateSettings"/> defines the settings related to the

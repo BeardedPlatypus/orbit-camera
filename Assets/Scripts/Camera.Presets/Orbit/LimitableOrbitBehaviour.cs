@@ -1,8 +1,7 @@
 ﻿using BeardedPlatypus.Camera.Core;
-using BeardedPlatypus.Camera.Presets.Orbit;
 using UnityEngine;
 
-namespace Camera.Presets.Orbit
+namespace BeardedPlatypus.Camera.Presets.Orbit
 {
     /// <summary>
     /// <see cref="LimitableOrbitBehaviour"/> implements the <see cref="IOrbitBehaviour"/>

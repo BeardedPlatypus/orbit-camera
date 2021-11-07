@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Camera.Presets.Zoom
+namespace BeardedPlatypus.Camera.Presets.Zoom
 {
     /// <summary>
     /// <see cref="LimitableZoomSettingsScriptableObject"/> provides the

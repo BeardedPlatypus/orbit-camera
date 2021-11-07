@@ -1,7 +1,7 @@
 ﻿using BeardedPlatypus.Camera.Core;
 using UnityEngine;
 
-namespace Camera.Presets.Translate
+namespace BeardedPlatypus.Camera.Presets.Translate
 {
     /// <summary>
     /// <see cref="LimitableTranslateBehaviour"/> implements the <see cref="ITranslateBehaviour"/>

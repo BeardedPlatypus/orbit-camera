@@ -1,6 +1,4 @@
-﻿using Camera.Presets.Orbit;
-
-namespace BeardedPlatypus.Camera.Presets.Orbit
+﻿namespace BeardedPlatypus.Camera.Presets.Orbit
 {
     /// <summary>
     /// <see cref="ILimitableOrbitSettings"/> defines the settings related to the

@@ -1,4 +1,4 @@
-﻿namespace Camera.Presets.Zoom
+﻿namespace BeardedPlatypus.Camera.Presets.Zoom
 {
     /// <summary>
     /// <see cref="ILimitableZoomSettings"/> defines the settings related to the zoom behaviour
