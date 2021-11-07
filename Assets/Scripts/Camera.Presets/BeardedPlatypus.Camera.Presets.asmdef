@@ -1,0 +1,16 @@
+{
+    "name": "BeardedPlatypus.Camera.Presets",
+    "rootNamespace": "BeardedPlatypus",
+    "references": [
+        "GUID:448f1b060ac71a545ae3ca3f5dd2d5ad"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
