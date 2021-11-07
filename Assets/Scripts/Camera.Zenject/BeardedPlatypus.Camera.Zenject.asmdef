@@ -3,6 +3,7 @@
     "rootNamespace": "BeardedPlatypus",
     "references": [
         "GUID:448f1b060ac71a545ae3ca3f5dd2d5ad",
+        "GUID:1d15a91be350aa44c8c003935a2cfaf1",
         "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [],
