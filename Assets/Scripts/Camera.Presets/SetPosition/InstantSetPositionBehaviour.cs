@@ -9,7 +9,7 @@ namespace BeardedPlatypus.Camera.Presets.SetPosition
     /// of the <see cref="ISetPositionBehaviour"/>. It will rotate the camera
     /// to the specified rotation immediately.
     /// </summary>
-    public class InstantSetPositionBehaviour : ISetPositionBehaviour
+    public sealed class InstantSetPositionBehaviour : ISetPositionBehaviour
     {
         public void OnSetPosition(Vector3 position, IOrbitCenter orbitCenter, Transform cameraTransform)
         {

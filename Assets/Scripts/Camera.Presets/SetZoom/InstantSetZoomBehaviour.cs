@@ -9,7 +9,7 @@ namespace BeardedPlatypus.Camera.Presets.SetZoom
     /// of the <see cref="ISetZoomBehaviour"/>. It will rotate the camera
     /// to the specified rotation immediately.
     /// </summary>
-    public class InstantSetZoomBehaviour : ISetZoomBehaviour
+    public sealed class InstantSetZoomBehaviour : ISetZoomBehaviour
     {
         public void OnSetZoom(float zoom, IOrbitCenter orbitCenter, Transform cameraTransform)
         {
