@@ -1,5 +1,6 @@
 ﻿using BeardedPlatypus.Camera.Core;
 using BeardedPlatypus.Camera.Core.Behaviours;
+using BeardedPlatypus.Camera.Presets.Common;
 using UnityEngine;
 
 namespace BeardedPlatypus.Camera.Presets.Orbit
@@ -41,45 +42,31 @@ namespace BeardedPlatypus.Camera.Presets.Orbit
                                    Vector3 orbitCenter, 
                                    Transform cameraTransform)
         {
-            var worldX = cameraTransform.TransformVector(Vector3.left);
-            var currentRotation = CalculateCameraRotationAroundX(cameraTransform);
+            var worldX = cameraTransform.TransformVector(Vector3.right);
+            var currentRotation = 
+                RotationCalculator.CalculateRotationAroundX(cameraTransform.position, 
+                                                            orbitCenter);
             
             // Note the negative sign of the newRotation, this is necessary to ensure we
             // rotate in the same direction as the mouse movement.
-            float clampedRotation = Mathf.Clamp(-rotation * Mathf.Deg2Rad,
-                                                -currentRotation + _settings.Limit.X.Min * Mathf.Deg2Rad,
-                                                _settings.Limit.X.Max * Mathf.Deg2Rad - currentRotation) 
-                * -Mathf.Rad2Deg;
+            float clampedRotation = Mathf.Clamp(-rotation,
+                                                -currentRotation + _settings.Limit.X.Min,
+                                                _settings.Limit.X.Max - currentRotation);
             
             cameraTransform.RotateAround(orbitCenter, worldX, clampedRotation);
-        }
-        
-        private static float CalculateCameraRotationAroundX(Transform cameraTransform)
-        {
-            Vector3 position = cameraTransform.position;
-            float distance = Vector3.Distance(position, Vector3.zero);
-            return Mathf.Asin(position.y / distance);
         }
         
         private void RotateAroundY(float rotation, 
                                    Vector3 orbitCenter, 
                                    Transform cameraTransform)
         {
-            float currentRotation = CalculateCameraRotationAroundY(cameraTransform);
+            float currentRotation = 
+                RotationCalculator.CalculateRotationAroundY(cameraTransform);
             float min = -currentRotation + _settings.Limit.Y.Min;
             float max = _settings.Limit.Y.Max - currentRotation;
 
             float clampedRotation = Mathf.Clamp(rotation, min, max);
             cameraTransform.RotateAround(orbitCenter, Vector3.up, clampedRotation);
-        }
-
-        private static float CalculateCameraRotationAroundY(Transform cameraTransform)
-        {
-            float rot = cameraTransform.rotation.eulerAngles.y;
-            // We evaluate the range between -180F and 180F, however
-            // The euler values will be reported between 0 - 360, as 
-            // such we need shift our scale.
-            return rot <= 180F ? rot : rot - 360.0F;
         }
     }
 }
