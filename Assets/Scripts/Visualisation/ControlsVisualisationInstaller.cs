@@ -1,3 +1,4 @@
+using UnityEngine;
 using Zenject;
 
 namespace BeardedPlatypus.Visualisation
@@ -9,10 +10,15 @@ namespace BeardedPlatypus.Visualisation
     /// </summary>
     public class ControlsVisualisationInstaller : MonoInstaller
     {
+        [SerializeField] private GameObject buttonPrefab;
+        
         public override void InstallBindings()
         {
             Container.Bind<ControlsVisualisationInputActions>()
                      .To<ControlsVisualisationInputActions>()
+                     .AsSingle();
+            Container.BindFactory<string, ButtonController, ButtonController.Factory>()
+                     .FromComponentInNewPrefab(buttonPrefab)
                      .AsSingle();
         }
     }
