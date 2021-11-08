@@ -43,6 +43,14 @@ namespace BeardedPlatypus.Visualisation
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""CtrlButton"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f13acd2b-c034-4f22-991e-06721a79e1dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -78,6 +86,17 @@ namespace BeardedPlatypus.Visualisation
                     ""action"": ""MiddleMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ecc7d29-5621-4d0f-a94e-6a1d0e49a5f3"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CtrlButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -89,6 +108,7 @@ namespace BeardedPlatypus.Visualisation
             m_ControlsVisualisation_LeftMouse = m_ControlsVisualisation.FindAction("LeftMouse", throwIfNotFound: true);
             m_ControlsVisualisation_RightMouse = m_ControlsVisualisation.FindAction("RightMouse", throwIfNotFound: true);
             m_ControlsVisualisation_MiddleMouse = m_ControlsVisualisation.FindAction("MiddleMouse", throwIfNotFound: true);
+            m_ControlsVisualisation_CtrlButton = m_ControlsVisualisation.FindAction("CtrlButton", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -141,6 +161,7 @@ namespace BeardedPlatypus.Visualisation
         private readonly InputAction m_ControlsVisualisation_LeftMouse;
         private readonly InputAction m_ControlsVisualisation_RightMouse;
         private readonly InputAction m_ControlsVisualisation_MiddleMouse;
+        private readonly InputAction m_ControlsVisualisation_CtrlButton;
         public struct ControlsVisualisationActions
         {
             private @ControlsVisualisationInputActions m_Wrapper;
@@ -148,6 +169,7 @@ namespace BeardedPlatypus.Visualisation
             public InputAction @LeftMouse => m_Wrapper.m_ControlsVisualisation_LeftMouse;
             public InputAction @RightMouse => m_Wrapper.m_ControlsVisualisation_RightMouse;
             public InputAction @MiddleMouse => m_Wrapper.m_ControlsVisualisation_MiddleMouse;
+            public InputAction @CtrlButton => m_Wrapper.m_ControlsVisualisation_CtrlButton;
             public InputActionMap Get() { return m_Wrapper.m_ControlsVisualisation; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -166,6 +188,9 @@ namespace BeardedPlatypus.Visualisation
                     @MiddleMouse.started -= m_Wrapper.m_ControlsVisualisationActionsCallbackInterface.OnMiddleMouse;
                     @MiddleMouse.performed -= m_Wrapper.m_ControlsVisualisationActionsCallbackInterface.OnMiddleMouse;
                     @MiddleMouse.canceled -= m_Wrapper.m_ControlsVisualisationActionsCallbackInterface.OnMiddleMouse;
+                    @CtrlButton.started -= m_Wrapper.m_ControlsVisualisationActionsCallbackInterface.OnCtrlButton;
+                    @CtrlButton.performed -= m_Wrapper.m_ControlsVisualisationActionsCallbackInterface.OnCtrlButton;
+                    @CtrlButton.canceled -= m_Wrapper.m_ControlsVisualisationActionsCallbackInterface.OnCtrlButton;
                 }
                 m_Wrapper.m_ControlsVisualisationActionsCallbackInterface = instance;
                 if (instance != null)
@@ -179,6 +204,9 @@ namespace BeardedPlatypus.Visualisation
                     @MiddleMouse.started += instance.OnMiddleMouse;
                     @MiddleMouse.performed += instance.OnMiddleMouse;
                     @MiddleMouse.canceled += instance.OnMiddleMouse;
+                    @CtrlButton.started += instance.OnCtrlButton;
+                    @CtrlButton.performed += instance.OnCtrlButton;
+                    @CtrlButton.canceled += instance.OnCtrlButton;
                 }
             }
         }
@@ -188,6 +216,7 @@ namespace BeardedPlatypus.Visualisation
             void OnLeftMouse(InputAction.CallbackContext context);
             void OnRightMouse(InputAction.CallbackContext context);
             void OnMiddleMouse(InputAction.CallbackContext context);
+            void OnCtrlButton(InputAction.CallbackContext context);
         }
     }
 }
