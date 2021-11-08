@@ -1,4 +1,5 @@
 ﻿using BeardedPlatypus.Camera.Core;
+using BeardedPlatypus.Camera.Core.Behaviours;
 using BeardedPlatypus.Camera.Presets.Zoom;
 using JetBrains.Annotations;
 using UnityEngine;

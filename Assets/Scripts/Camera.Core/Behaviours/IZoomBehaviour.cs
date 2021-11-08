@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BeardedPlatypus.Camera.Core
+namespace BeardedPlatypus.Camera.Core.Behaviours
 {
     /// <summary>
     /// <see cref="IZoomBehaviour"/> defines the interface with which the <see cref="Controller"/>

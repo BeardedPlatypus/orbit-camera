@@ -1,4 +1,5 @@
 ﻿using BeardedPlatypus.Camera.Core;
+using BeardedPlatypus.Camera.Core.Behaviours;
 using UnityEngine;
 
 namespace BeardedPlatypus.Camera.Presets.Translate
