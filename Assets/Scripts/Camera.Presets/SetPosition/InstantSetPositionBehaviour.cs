@@ -13,8 +13,9 @@ namespace BeardedPlatypus.Camera.Presets.SetPosition
     {
         public void OnSetPosition(Vector3 position, IOrbitCenter orbitCenter, Transform cameraTransform)
         {
+            var cameraOffset = cameraTransform.position - orbitCenter.Location;
             orbitCenter.MoveTo(position);
-            cameraTransform.SetPositionAndRotation(position, cameraTransform.rotation);
+            cameraTransform.SetPositionAndRotation(position + cameraOffset, cameraTransform.rotation);
         }
     }
 }

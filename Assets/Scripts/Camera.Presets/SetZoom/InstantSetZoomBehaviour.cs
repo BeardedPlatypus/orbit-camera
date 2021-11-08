@@ -14,7 +14,7 @@ namespace BeardedPlatypus.Camera.Presets.SetZoom
         public void OnSetZoom(float zoom, IOrbitCenter orbitCenter, Transform cameraTransform)
         {
             float currDistance = Vector3.Distance(cameraTransform.position, orbitCenter.Location);
-            cameraTransform.Translate(new Vector3(0F, 0F, zoom - currDistance));
+            cameraTransform.Translate(new Vector3(0F, 0F, -(zoom - currDistance)));
         }
     }
 }
