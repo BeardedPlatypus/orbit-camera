@@ -6,11 +6,11 @@ using UnityEngine;
 namespace BeardedPlatypus.Camera.Presets.SetOrbit
 {
     /// <summary>
-    /// <see cref="SetOrbitBehaviour"/> provides the default implementation
+    /// <see cref="InstantSetOrbitBehaviour"/> provides the default implementation
     /// of the <see cref="ISetOrbitBehaviour"/>. It will rotate the camera
-    /// to the specified rotation.
+    /// to the specified rotation immediately.
     /// </summary>
-    public class SetOrbitBehaviour : ISetOrbitBehaviour
+    public sealed class InstantSetOrbitBehaviour : ISetOrbitBehaviour
     {
         /// <inheritdoc cref="ISetOrbitBehaviour"/>>
         public void OnSetOrbit(Vector2 rotation, IOrbitCenter orbitCenter, Transform cameraTransform)
