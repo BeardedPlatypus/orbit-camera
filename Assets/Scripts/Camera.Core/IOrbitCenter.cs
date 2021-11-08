@@ -19,6 +19,10 @@ namespace BeardedPlatypus.Camera.Core
         /// <param name="translation"></param>
         void TranslateBy(Vector3 translation);
 
+        /// <summary>
+        /// Move this <see cref="IOrbitCenter"/> to <paramref name="newOrbitCenter"/>.
+        /// </summary>
+        /// <param name="newOrbitCenter">The new orbit center location.</param>
         void MoveTo(Vector3 newOrbitCenter);
     }
 }
