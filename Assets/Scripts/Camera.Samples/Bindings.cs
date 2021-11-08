@@ -28,6 +28,10 @@ namespace BeardedPlatypus.Camera.Samples
         /// <inheritdoc cref="IBindings"/>
         public IObservable<float> Zoom { get; private set; }
 
+        public IObservable<Vector2> SetOrbit { get; private set; }
+        public IObservable<Vector3> SetPosition { get; private set; }
+        public IObservable<float> SetZoom { get; private set; }
+
         private void Awake()
         {
             ConfigureObservables();
@@ -46,6 +50,10 @@ namespace BeardedPlatypus.Camera.Samples
             ConfigureOrbitObservable(dragStream);
             ConfigureTranslateObservable(dragStream);
             ConfigureZoomObservable();
+            
+            SetOrbit = Observable.Empty<Vector2>();
+            SetPosition = Observable.Empty<Vector3>();
+            SetZoom = Observable.Empty<float>();
         }
         
         private void ConfigureOrbitObservable(IObservable<Vector2> dragStream)
