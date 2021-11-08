@@ -109,8 +109,8 @@ namespace BeardedPlatypus.Camera.Samples
 
             // TODO: Move these values to a more sensible location.
             SetOrbit = resetClickStream.Select(_ => new Vector2(45F, 0F));
-            SetPosition = Observable.Empty<Vector3>();
-            SetZoom = Observable.Empty<float>();
+            SetPosition = resetClickStream.Select(_ => Vector3.zero);
+            SetZoom = resetClickStream.Select(_ => Mathf.Sqrt(18F));
         }
     }
 }

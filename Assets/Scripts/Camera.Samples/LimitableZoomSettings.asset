@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factor: 0.005
   limitMin: 0.5
-  limitMax: 5
+  limitMax: 10
