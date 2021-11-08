@@ -3,6 +3,7 @@ using BeardedPlatypus.Camera.Core;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Zenject;
 
 namespace BeardedPlatypus.Camera.Samples
@@ -14,11 +15,14 @@ namespace BeardedPlatypus.Camera.Samples
     public sealed class Bindings : MonoBehaviour, IBindings
     {
         private CameraInputActions _inputActions;
+        private Button _resetViewButton;
  
         [Inject]
-        private void Init(CameraInputActions inputActions)
+        private void Init(CameraInputActions inputActions,
+                          Button resetViewButton)
         {
             _inputActions = inputActions;
+            _resetViewButton = resetViewButton;
         }
         
         /// <inheritdoc cref="IBindings"/>
@@ -50,10 +54,8 @@ namespace BeardedPlatypus.Camera.Samples
             ConfigureOrbitObservable(dragStream);
             ConfigureTranslateObservable(dragStream);
             ConfigureZoomObservable();
-            
-            SetOrbit = Observable.Empty<Vector2>();
-            SetPosition = Observable.Empty<Vector3>();
-            SetZoom = Observable.Empty<float>();
+
+            ConfigureSetObservables();
         }
         
         private void ConfigureOrbitObservable(IObservable<Vector2> dragStream)
@@ -100,5 +102,15 @@ namespace BeardedPlatypus.Camera.Samples
             context.ReadValue<T>();
         private static bool InterpretAsBool(InputAction.CallbackContext context) => 
             context.ReadValue<float>() != 0F;
+
+        private void ConfigureSetObservables()
+        {
+            IObservable<Unit> resetClickStream = _resetViewButton.OnClickAsObservable();
+
+            // TODO: Move these values to a more sensible location.
+            SetOrbit = resetClickStream.Select(_ => new Vector2(45F, 0F));
+            SetPosition = Observable.Empty<Vector3>();
+            SetZoom = Observable.Empty<float>();
+        }
     }
 }
