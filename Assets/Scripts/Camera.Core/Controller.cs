@@ -23,7 +23,10 @@ namespace BeardedPlatypus.Camera.Core
         [CanBeNull] private readonly IOrbitBehaviour _orbitBehaviour;
         [CanBeNull] private readonly ITranslateBehaviour _translateBehaviour;
         [CanBeNull] private readonly IZoomBehaviour _zoomBehaviour;
-        
+        [CanBeNull] private readonly ISetOrbitBehaviour _setOrbitBehaviour;
+        [CanBeNull] private readonly ISetPositionBehaviour _setPositionBehaviour;
+        [CanBeNull] private readonly ISetZoomBehaviour _setZoomBehaviour;
+
         /// <summary>
         /// Creates a new <see cref="Controller"/> with the given dependencies.
         /// </summary>
@@ -32,6 +35,9 @@ namespace BeardedPlatypus.Camera.Core
         /// <param name="orbitBehaviour">Optional orbit behaviour.</param>
         /// <param name="translateBehaviour">Optional translate behaviour</param>
         /// <param name="zoomBehaviour">Optional zoom behaviour</param>
+        /// <param name="setOrbitBehaviour">Optional set orbit behaviour</param>
+        /// <param name="setPositionBehaviour">Optional set position behaviour</param>
+        /// <param name="setZoomBehaviour">Optional set zoom behaviour</param>
         /// <remarks>
         /// If any of the behaviours is set to <c>null</c>, the reactive streams
         /// will be ignored.
@@ -40,7 +46,10 @@ namespace BeardedPlatypus.Camera.Core
                           IOrbitCenter orbitCenter,
                           [CanBeNull] IOrbitBehaviour orbitBehaviour = null,
                           [CanBeNull] ITranslateBehaviour translateBehaviour = null,
-                          [CanBeNull] IZoomBehaviour zoomBehaviour = null)
+                          [CanBeNull] IZoomBehaviour zoomBehaviour = null,
+                          [CanBeNull] ISetOrbitBehaviour setOrbitBehaviour = null,
+                          [CanBeNull] ISetPositionBehaviour setPositionBehaviour = null,
+                          [CanBeNull] ISetZoomBehaviour setZoomBehaviour = null)
         {
             _bindings = bindings;
             _orbitCenter = orbitCenter;
@@ -48,6 +57,10 @@ namespace BeardedPlatypus.Camera.Core
             _orbitBehaviour = orbitBehaviour;
             _translateBehaviour = translateBehaviour;
             _zoomBehaviour = zoomBehaviour;
+
+            _setOrbitBehaviour = setOrbitBehaviour;
+            _setPositionBehaviour = setPositionBehaviour;
+            _setZoomBehaviour = setZoomBehaviour;
             
             ConfigureSubscriptions();
         }
@@ -66,6 +79,9 @@ namespace BeardedPlatypus.Camera.Core
             _bindings.Orbit.Subscribe(OnOrbit).AddTo(_disposable);
             _bindings.Translate.Subscribe(OnTranslate).AddTo(_disposable);
             _bindings.Zoom.Subscribe(OnZoom).AddTo(_disposable);
+            _bindings.SetOrbit.Subscribe(OnSetOrbit).AddTo(_disposable);
+            _bindings.SetPosition.Subscribe(OnSetPosition).AddTo(_disposable);
+            _bindings.SetZoom.Subscribe(OnSetZoom).AddTo(_disposable);
         }
 
         private void OnOrbit(Vector2 inputTranslation)
@@ -97,6 +113,30 @@ namespace BeardedPlatypus.Camera.Core
         }
         
         private bool IsZoomEnabled() => !(_zoomBehaviour is null);
+
+        private void OnSetOrbit(Vector2 rotation)
+        {
+            if (!IsSetOrbitEnabled() || VirtualCameraTransform is null) return;
+            _setOrbitBehaviour!.OnSetOrbit(rotation, _orbitCenter, VirtualCameraTransform);
+        }
+
+        private bool IsSetOrbitEnabled() => !(_setOrbitBehaviour is null);
+
+        private void OnSetPosition(Vector3 position)
+        {
+            if (!IsSetPositionEnabled() || VirtualCameraTransform is null) return;
+            _setPositionBehaviour!.OnSetPosition(position, _orbitCenter, VirtualCameraTransform);
+        }
+        
+        private bool IsSetPositionEnabled() => !(_setPositionBehaviour is null);
+
+        private void OnSetZoom(float zoom)
+        {
+            if (!IsSetZoomEnabled() || VirtualCameraTransform is null) return;
+            _setZoomBehaviour!.OnSetZoom(zoom, _orbitCenter, VirtualCameraTransform);
+        }
+        
+        private bool IsSetZoomEnabled() => !(_setZoomBehaviour is null);
 
         /// <inheritdoc cref="IDisposable.Dispose"/>
         public void Dispose() => _disposable?.Dispose();
