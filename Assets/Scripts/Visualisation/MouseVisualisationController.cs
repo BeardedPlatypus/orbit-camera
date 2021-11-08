@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
 
-namespace BeardedPlatypus.Camera.Samples
+namespace BeardedPlatypus.Visualisation
 {
     /// <summary>
     /// <see cref="MouseVisualisationController"/> implements the behaviour

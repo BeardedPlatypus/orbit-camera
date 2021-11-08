@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace BeardedPlatypus.Camera.Samples
+namespace BeardedPlatypus.Visualisation
 {
     /// <summary>
     /// <see cref="ControlsVisualisationInstaller"/> provides the
