@@ -1,5 +1,4 @@
-﻿using BeardedPlatypus.Camera.Core;
-using BeardedPlatypus.Camera.Core.Behaviours;
+﻿using BeardedPlatypus.Camera.Core.Behaviours;
 using BeardedPlatypus.Camera.Presets.Translate;
 using JetBrains.Annotations;
 using UnityEngine;
