@@ -36,7 +36,7 @@ public class @CameraInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""TranslateAlt"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""487972e7-1353-4ef3-9cb6-237cab0973ed"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
