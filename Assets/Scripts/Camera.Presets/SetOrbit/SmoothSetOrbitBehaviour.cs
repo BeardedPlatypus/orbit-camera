@@ -18,13 +18,13 @@ namespace BeardedPlatypus.Camera.Presets.SetOrbit
         }
 
         public void OnSetOrbit(Vector2 rotation, IOrbitCenter orbitCenter, Transform cameraTransform) =>
-            _runner.Run(RotateSmooth(rotation, orbitCenter.Location, cameraTransform));
+            _runner.Run(RotateSmooth(rotation, orbitCenter, cameraTransform));
 
         private IEnumerator RotateSmooth(Vector2 rotation,
-                                         Vector3 orbitCenter,
+                                         IOrbitCenter orbitCenter,
                                          Transform cameraTransform)
         {
-            float rotationX = CalculateRotationX(rotation.x, orbitCenter, cameraTransform);
+            float rotationX = CalculateRotationX(rotation.x, orbitCenter.Location, cameraTransform);
             float rotationY = CalculateRotationY(rotation.y, cameraTransform);
 
             float transitionTimeX = Mathf.Abs(rotationX) * (_maxTransitionTime / 90F);
@@ -34,10 +34,12 @@ namespace BeardedPlatypus.Camera.Presets.SetOrbit
             for (var t = 0.0F; t < 1.0F; t += Time.deltaTime * timeFactor)
             {
                 var rotationFactor = Time.deltaTime * timeFactor;
-                
-                Vector3 axisX = cameraTransform.TransformVector(Vector3.right);
-                cameraTransform.RotateAround(orbitCenter, axisX, rotationFactor * rotationX);
-                cameraTransform.RotateAround(orbitCenter, Vector3.up, rotationFactor * rotationY);
+                cameraTransform.RotateAround(orbitCenter.Location, 
+                                             cameraTransform.TransformVector(Vector3.right),
+                                             rotationFactor * rotationX);
+                cameraTransform.RotateAround(orbitCenter.Location, 
+                                             Vector3.up, 
+                                             rotationFactor * rotationY);
                 
                 yield return null;
             }
