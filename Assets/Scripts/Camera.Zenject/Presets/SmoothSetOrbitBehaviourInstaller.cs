@@ -5,7 +5,11 @@ using Zenject;
 
 namespace BeardedPlatypus.Camera.Zenject.Presets
 {
-    public class SmoothSetOrbitBehaviourInstaller : MonoInstaller
+    /// <summary>
+    /// <see cref="SmoothSetOrbitBehaviourInstaller"/> provides the <see cref="ISetOrbitBehaviour"/>
+    /// dependency as a <see cref="SmoothSetOrbitBehaviour"/>.
+    /// </summary>
+    public sealed class SmoothSetOrbitBehaviourInstaller : MonoInstaller
     {
         [SerializeField] private float maxTransitionTime = 0.5F;
 
