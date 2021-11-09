@@ -30,7 +30,7 @@ namespace BeardedPlatypus.Camera.Presets.Translate
         {
             Vector3 xComponent = cameraTransform.TransformVector(
                 new Vector3(-inputTranslation.x * _settings.Factor, 0F, 0F));
-            Vector3 yComponent = new Vector3(0F, inputTranslation.y * _settings.Factor);
+            Vector3 yComponent = new Vector3(0F, -inputTranslation.y * _settings.Factor);
             Vector3 zComponent = CalculateZComponent(cameraTransform) * 
                                  (_settings.Factor * -inputTranslation.z);
 
