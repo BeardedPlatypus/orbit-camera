@@ -6,17 +6,28 @@ using UnityEngine;
 
 namespace BeardedPlatypus.Camera.Presets.SetOrbit
 {
+    /// <summary>
+    /// <see cref="SmoothSetOrbitBehaviour"/> sets the provided rotation over
+    /// the specified transition time.
+    /// </summary>
     public sealed class SmoothSetOrbitBehaviour : ISetOrbitBehaviour
     {
-        private readonly float _maxTransitionTime;
+        private readonly float _transitionTime;
         private readonly ICoroutineRunner _runner;
 
-        public SmoothSetOrbitBehaviour(float maxTransitionTime, ICoroutineRunner runner)
+        /// <summary>
+        /// Creates a new <see cref="SmoothSetOrbitBehaviour"/> with the given
+        /// dependencies.
+        /// </summary>
+        /// <param name="transitionTime">The transition time.</param>
+        /// <param name="runner">The coroutine runner.</param>
+        public SmoothSetOrbitBehaviour(float transitionTime, ICoroutineRunner runner)
         {
-            _maxTransitionTime = maxTransitionTime;
+            _transitionTime = transitionTime;
             _runner = runner;
         }
-
+        
+        /// <inheritdoc cref="ISetOrbitBehaviour.OnSetOrbit"/>
         public void OnSetOrbit(Vector2 rotation, IOrbitCenter orbitCenter, Transform cameraTransform) =>
             _runner.Run(RotateSmooth(rotation, orbitCenter, cameraTransform));
 
@@ -27,9 +38,7 @@ namespace BeardedPlatypus.Camera.Presets.SetOrbit
             float rotationX = CalculateRotationX(rotation.x, orbitCenter.Location, cameraTransform);
             float rotationY = CalculateRotationY(rotation.y, cameraTransform);
 
-            float transitionTimeX = Mathf.Abs(rotationX) * (_maxTransitionTime / 90F);
-            float transitionTimeY = Mathf.Abs(rotationY) * (_maxTransitionTime / 180F);
-            float timeFactor = 1.0F / Mathf.Max(transitionTimeX, transitionTimeY);
+            float timeFactor = 1.0F / _transitionTime;
 
             for (var t = 0.0F; t < 1.0F; t += Time.deltaTime * timeFactor)
             {
@@ -49,10 +58,8 @@ namespace BeardedPlatypus.Camera.Presets.SetOrbit
                                                 Vector3 orbitCenter,
                                                 Transform cameraTransform)
         {
-            Vector3 axis = cameraTransform.TransformVector(Vector3.right);
             float currentRotation = RotationCalculator.CalculateRotationAroundX(cameraTransform.position,
                                                                                 orbitCenter);
-
             return goalRotation - currentRotation;
         }
 
