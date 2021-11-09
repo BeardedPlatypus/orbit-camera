@@ -3,7 +3,6 @@ using BeardedPlatypus.Camera.Core;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using Zenject;
 
 namespace BeardedPlatypus.Camera.Samples
@@ -15,14 +14,14 @@ namespace BeardedPlatypus.Camera.Samples
     public sealed class Bindings : MonoBehaviour, IBindings
     {
         private CameraInputActions _inputActions;
-        private Button _resetViewButton;
+        private ResetViewController _resetViewController;
  
         [Inject]
         private void Init(CameraInputActions inputActions,
-                          Button resetViewButton)
+                          ResetViewController resetViewController)
         {
             _inputActions = inputActions;
-            _resetViewButton = resetViewButton;
+            _resetViewController = resetViewController;
         }
         
         /// <inheritdoc cref="IBindings"/>
@@ -105,12 +104,10 @@ namespace BeardedPlatypus.Camera.Samples
 
         private void ConfigureSetObservables()
         {
-            IObservable<Unit> resetClickStream = _resetViewButton.OnClickAsObservable();
-
-            // TODO: Move these values to a more sensible location.
-            SetOrbit = resetClickStream.Select(_ => new Vector2(45F, 0F));
-            SetPosition = resetClickStream.Select(_ => Vector3.zero);
-            SetZoom = resetClickStream.Select(_ => Mathf.Sqrt(18F));
+            // In the future other streams that work with the set behaviour can be mixed in here.
+            SetOrbit = _resetViewController.ResetOrbitObservable;
+            SetPosition = _resetViewController.ResetPositionObservable;
+            SetZoom = _resetViewController.ResetZoomObservable;
         }
     }
 }

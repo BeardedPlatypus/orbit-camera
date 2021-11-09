@@ -525,8 +525,6 @@ GameObject:
   - component: {fileID: 888120228}
   - component: {fileID: 888120226}
   - component: {fileID: 888120230}
-  - component: {fileID: 888120231}
-  - component: {fileID: 888120233}
   - component: {fileID: 888120232}
   - component: {fileID: 888120235}
   - component: {fileID: 888120234}
@@ -608,6 +606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resetViewButton: {fileID: 1879289272}
+  resetData: {fileID: 11400000, guid: 0460df1720239934b9181974ac3aa8f4, type: 2}
 --- !u!114 &888120225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,18 +683,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitCenter: {x: 0, y: 0, z: 0}
---- !u!114 &888120231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 888120221}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 497953e746fa4827a91693b6f50e1a3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &888120232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,18 +693,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0008956f57f6459db1a78318d4166932, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &888120233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 888120221}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100355abf3aa455bb19963cd68775856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &888120234
