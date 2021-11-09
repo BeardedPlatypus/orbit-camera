@@ -18,10 +18,10 @@ namespace BeardedPlatypus.Camera.Presets.Common
         /// The rotation in degrees.
         /// </returns>
         public static float CalculateRotationAroundX(Vector3 position,
-                                                           Vector3 orbitCenter)
+                                                     Vector3 orbitCenter)
         {
             float distance = Vector3.Distance(position, orbitCenter);
-            return Mathf.Asin(position.y / distance) * Mathf.Rad2Deg;
+            return Mathf.Asin((position.y - orbitCenter.y) / distance) * Mathf.Rad2Deg;
         }
         
         /// <summary>
