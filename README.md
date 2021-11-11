@@ -1,4 +1,5 @@
 <p align='center'><img align='center' src='https://github.com/BeardedPlatypus/unity-camera-package/blob/main/.docs/camera.png?raw=true' width='25%'></p>
+
 *this is a work-in-progress and will be updated further soon*
 
 # BeardedPlatypus/unity-camera-package
