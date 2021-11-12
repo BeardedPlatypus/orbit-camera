@@ -14,7 +14,7 @@ better ways to achieve similar or better results.
 
 ## Demo
 
-<p align='center'><img align='center' src='https://github.com/BeardedPlatypus/media-storage/blob/main/unity-camera-package/camera_demo_medium.gif?raw=true' width='33%'></p>
+<p align='center'><img align='center' src='https://github.com/BeardedPlatypus/media-storage/blob/main/unity-camera-package/camera_demo_medium.gif?raw=true' width='66%'></p>
 
 *A more extensive video, as well as an interactive demo will be added shortly.*
 
