@@ -1,8 +1,8 @@
 {
     "name": "com.beardedplatypus.orbit-camera.core",
     "version": "0.1.0",
-    "displayName": "BeardedPlatypus.orbit-camera.core",
-    "description": "The core package of BeardedPlatypus.orbit-camera",
+    "displayName": "BeardedPlatypus.OrbitCamera.Core",
+    "description": "The core package of BeardedPlatypus.OrbitCamera",
     "unity": "2020.3",
     "documentationUrl": "https://github.com/BeardedPlatypus/orbit-camera",
     "changelogUrl": "https://github.com/BeardedPlatypus/orbit-camera/blob/main/CHANGELOG.md",
