@@ -2,7 +2,7 @@
 
 *this is a work-in-progress and will be updated further soon*
 
-# BeardedPlatypus.orbit-camera
+# BeardedPlatypus.OrbitCamera
 
 A simple orbit camera implementation build around CineMachine with UniRx and optionally
 Zenject. The primary goal is to provide a simple, reusable, and injectable camera 
@@ -28,6 +28,26 @@ it was about time to create a simple package that would provide this behaviour
 out of the box, but still allowed for enough customisability such that it could
 be reused in a variety of different projects. Basically, take out the boilerplate
 so I can focus on the interesting behaviour. 
+
+## Quickstart: Install the UPM packages
+
+*The following describes how to quickly get this package up and running, for a more detailed approach see the Installation section.*
+
+The OrbitCamera package consists of the following upm packages:
+
+* [BeardedPlatypus.OrbitCamera.Core](https://github.com/BeardedPlatypus/orbit-camera/tree/upm/core): Contains the main concepts and interfaces to use the camera setup.
+* [BeardedPlatypus.OrbitCamera.Presets](https://github.com/BeardedPlatypus/orbit-camera/tree/upm/presets): Contains the preset implementations for the behaviour of the camera.
+* [BeardedPlatypus.OrbitCamera.Zenject](https://github.com/BeardedPlatypus/orbit-camera/tree/upm/zenject): An optional package which provides the [Zenject](https://github.com/modesttree/Zenject) installers to facilitate dependency injection.
+
+Each of these can be installed by adding the following URLs to your Unity Package Manager:
+
+```
+https://github.com/BeardedPlatypus/orbit-camera.git#upm/core
+https://github.com/BeardedPlatypus/orbit-camera.git#upm/presets
+https://github.com/BeardedPlatypus/orbit-camera.git#upm/zenject
+```
+Note that you will need [the latest version of Zenject](https://github.com/modesttree/Zenject/releases/tag/9.2.0) and [UniRx](https://github.com/neuecc/UniRx).
+Once this has been setup you can configure your project similar to how [Samples assembly](https://github.com/BeardedPlatypus/orbit-camera/tree/main/Assets/Scripts/OrbitCamera.Samples) is configured.
 
 ## Installation: Reuse the upm packages or extend the existing code
 
