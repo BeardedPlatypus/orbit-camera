@@ -2,8 +2,7 @@
     "name": "BeardedPlatypus.Camera.Core",
     "rootNamespace": "BeardedPlatypus",
     "references": [
-        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
