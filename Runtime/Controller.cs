@@ -1,10 +1,10 @@
 using System;
-using BeardedPlatypus.Camera.Core.Behaviours;
+using BeardedPlatypus.OrbitCamera.Core.Behaviours;
 using JetBrains.Annotations;
 using UniRx;
 using UnityEngine;
 
-namespace BeardedPlatypus.Camera.Core
+namespace BeardedPlatypus.OrbitCamera.Core
 {
     /// <summary>
     /// <see cref="Controller"/> the controller is responsible for controlling the

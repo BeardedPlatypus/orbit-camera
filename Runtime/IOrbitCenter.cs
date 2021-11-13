@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BeardedPlatypus.Camera.Core
+namespace BeardedPlatypus.OrbitCamera.Core
 {
     /// <summary>
     /// <see cref="IOrbitCenter"/> defines the orbit center of a camera.

@@ -1,5 +1,5 @@
 {
-    "name": "BeardedPlatypus.Camera.Core",
+    "name": "BeardedPlatypus.OrbitCamera.Core",
     "rootNamespace": "BeardedPlatypus",
     "references": [
         "GUID:560b04d1a97f54a4e82edc0cbbb69285"

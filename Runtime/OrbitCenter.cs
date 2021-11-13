@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BeardedPlatypus.Camera.Core
+namespace BeardedPlatypus.OrbitCamera.Core
 {
     /// <summary>
     /// <see cref="OrbitCenter"/> implements <see cref="IOrbitCenter"/> as a

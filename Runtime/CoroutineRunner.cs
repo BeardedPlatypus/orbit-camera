@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace BeardedPlatypus.Camera.Core
+namespace BeardedPlatypus.OrbitCamera.Core
 {
     /// <summary>
     /// <see cref="CoroutineRunner"/> implements the <see cref="ICoroutineRunner"/> interface.

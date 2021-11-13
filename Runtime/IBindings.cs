@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BeardedPlatypus.Camera.Core
+namespace BeardedPlatypus.OrbitCamera.Core
 {
     /// <summary>
     /// <see cref="IBindings"/> defines the bindings used within the controller
