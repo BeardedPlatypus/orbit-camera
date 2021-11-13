@@ -4,9 +4,9 @@
     "displayName": "BeardedPlatypus.orbit-camera.core",
     "description": "The core package of BeardedPlatypus.orbit-camera",
     "unity": "2020.3",
-    "documentationUrl": "https://github.com/BeardedPlatypus/unity-camera-package",
-    "changelogUrl": "https://github.com/BeardedPlatypus/unity-camera-package/blob/main/CHANGELOG.md",
-    "licensesUrl": "https://github.com/BeardedPlatypus/unity-camera-package/blob/main/LICENSE",
+    "documentationUrl": "https://github.com/BeardedPlatypus/orbit-camera",
+    "changelogUrl": "https://github.com/BeardedPlatypus/orbit-camera/blob/main/CHANGELOG.md",
+    "licensesUrl": "https://github.com/BeardedPlatypus/orbit-camera/blob/main/LICENSE",
     "dependencies": {
         "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
     },
