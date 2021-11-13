@@ -1,6 +1,6 @@
 <p align='center'><img align='center' src='https://github.com/BeardedPlatypus/unity-camera-package/blob/main/.docs/camera.png?raw=true' width='25%'></p>
 
-# UPM: BeardedPlatypus.orbit-camera.presets
+# UPM: BeardedPlatypus.OrbitCamera.Presets
 
 The upm branch containing some of the preset implementation of the interfaces provided
 in the core package of the BeardedPlatypus.orbit-camera 
