@@ -1,8 +1,8 @@
 {
     "name": "com.beardedplatypus.orbit-camera.presets",
     "version": "0.1.0",
-    "displayName": "BeardedPlatypus.orbit-camera.presets",
-    "description": "The presets package of BeardedPlatypus.orbit-camera",
+    "displayName": "BeardedPlatypus.OrbitCamera.Presets",
+    "description": "The presets package of BeardedPlatypus.OrbitCamera",
     "unity": "2020.3",
     "documentationUrl": "https://github.com/BeardedPlatypus/orbit-camera",
     "changelogUrl": "https://github.com/BeardedPlatypus/orbit-camera/blob/main/CHANGELOG.md",
