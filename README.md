@@ -2,7 +2,7 @@
 
 *this is a work-in-progress and will be updated further soon*
 
-# BeardedPlatypus/unity-camera-package
+# BeardedPlatypus.orbit-camera
 
 A simple orbit camera implementation build around CineMachine with UniRx and optionally
 Zenject. The primary goal is to provide a simple, reusable, and injectable camera 
