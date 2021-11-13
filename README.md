@@ -1,6 +1,6 @@
 <p align='center'><img align='center' src='https://github.com/BeardedPlatypus/unity-camera-package/blob/main/.docs/camera.png?raw=true' width='25%'></p>
 
-# UPM: BeardedPlatypus.orbit-camera.core
+# UPM: BeardedPlatypus.OrbitCamera.Core
 
 The upm branch containing the core components of the BeardedPlatypus.orbit-camera 
 package. For the specifics of the BeardedPlatypus.orbit-camera package please
