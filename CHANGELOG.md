@@ -8,6 +8,14 @@ to [Semantic Versioning][semver].
 [keep_a_changelog]: https://keepachangelog.com/en/1.0.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
+## [2.0.0]
+
+### Added
+
+* Replace Zenject with [UniDi][unidi]
+
+[unidi]: https://github.com/UniDi/UniDi
+
 ## [1.0.0]
 
 ### Added

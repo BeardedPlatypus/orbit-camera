@@ -1,4 +1,4 @@
-using Zenject;
+using UniDi;
 
 namespace BeardedPlatypus.OrbitCamera.Samples
 {

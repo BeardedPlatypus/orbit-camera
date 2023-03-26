@@ -3,7 +3,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using Zenject;
+using UniDi;
 
 namespace BeardedPlatypus.Visualisation
 {

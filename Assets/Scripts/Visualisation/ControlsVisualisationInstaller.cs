@@ -1,5 +1,5 @@
 using UnityEngine;
-using Zenject;
+using UniDi;
 
 namespace BeardedPlatypus.Visualisation
 {

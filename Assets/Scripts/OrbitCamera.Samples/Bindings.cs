@@ -3,7 +3,7 @@ using BeardedPlatypus.OrbitCamera.Core;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Zenject;
+using UniDi;
 
 namespace BeardedPlatypus.OrbitCamera.Samples
 {

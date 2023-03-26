@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
+    "com.unidi.unidi": "https://github.com/UniDi/UniDi.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.cinemachine": "2.6.17",
     "com.unity.collab-proxy": "1.13.5",

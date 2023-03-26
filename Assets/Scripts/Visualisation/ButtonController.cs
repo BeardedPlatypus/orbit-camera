@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
+using UniDi;
 
 namespace BeardedPlatypus.Visualisation
 {
