@@ -2,7 +2,7 @@
 
 # UPM: BeardedPlatypus.OrbitCamera.Core
 
-The upm branch containing the core components of the BeardedPlatypus.orbit-camera 
+The upm branch containing the core components of the BeardedPlatypus.orbit-camera
 package. For the specifics of the BeardedPlatypus.orbit-camera package please
 refer to [the main branch](https://github.com/BeardedPlatypus/orbit-camera).
 
@@ -18,7 +18,7 @@ https://github.com/BeardedPlatypus/orbit-camera.git#upm/core
 For more details on adding packages through UPM,
 [refer to the official documentation](https://docs.unity3d.com/Manual/upm-git.html)
 
-## Licens: MIT
+## License: MIT
 
-This package is released as isunder [the MIT license](https://github.com/BeardedPlatypus/orbit-camera/blob/main/LICENSE).
+This package is released as is under [the MIT license](https://github.com/BeardedPlatypus/orbit-camera/blob/main/LICENSE).
 You are free to reuse it for both non-commercial and commercial use.
