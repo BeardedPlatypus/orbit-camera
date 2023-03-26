@@ -1,0 +1,18 @@
+{
+    "name": "BeardedPlatypus.OrbitCamera.UniDi",
+    "rootNamespace": "BeardedPlatypus",
+    "references": [
+        "GUID:448f1b060ac71a545ae3ca3f5dd2d5ad",
+        "GUID:1d15a91be350aa44c8c003935a2cfaf1",
+        "GUID:50ca6016748204b04950f89ee0e3b989"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,25 @@
+{
+    "name": "com.beardedplatypus.orbit-camera.unidi",
+    "version": "2.0.0",
+    "displayName": "BeardedPlatypus.OrbitCamera.UniDi",
+    "description": "The UniDi package of BeardedPlatypus.orbit-camera",
+    "unity": "2020.3",
+    "documentationUrl": "https://github.com/BeardedPlatypus/orbit-camera",
+    "changelogUrl": "https://github.com/BeardedPlatypus/orbit-camera/blob/main/CHANGELOG.md",
+    "licensesUrl": "https://github.com/BeardedPlatypus/orbit-camera/blob/main/LICENSE",
+    "dependencies": {
+        "com.beardedplatypus.orbit-camera.core": "https://github.com/BeardedPlatypus/orbit-camera.git#upm/core",
+        "com.beardedplatypus.orbit-camera.presets": "https://github.com/BeardedPlatypus/orbit-camera.git#upm/presets",
+        "com.unidi.unidi": "https://github.com/UniDi/UniDi.git"
+    },
+    "keywords": [
+        "camera",
+        "orbit",
+        "zenject"
+    ],
+    "author": {
+        "name": "Maarten Tegelaers",
+        "email": "mwtegelaers@gmail.com",
+        "url": "https://github.com/BeardedPlatypus"
+    }
+}
