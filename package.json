@@ -1,6 +1,6 @@
 {
     "name": "com.beardedplatypus.orbit-camera.presets",
-    "version": "0.1.0",
+    "version": "2.0.0",
     "displayName": "BeardedPlatypus.OrbitCamera.Presets",
     "description": "The presets package of BeardedPlatypus.OrbitCamera",
     "unity": "2020.3",
@@ -8,7 +8,7 @@
     "changelogUrl": "https://github.com/BeardedPlatypus/orbit-camera/blob/main/CHANGELOG.md",
     "licensesUrl": "https://github.com/BeardedPlatypus/orbit-camera/blob/main/LICENSE",
     "dependencies": {
-        "com.beardedplatypus.orbit-camera.core": "0.1.0"
+        "com.beardedplatypus.orbit-camera.core": "https://github.com/BeardedPlatypus/orbit-camera.git#upm/core"
     },
     "keywords": [
         "camera",
