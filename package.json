@@ -15,7 +15,7 @@
     "keywords": [
         "camera",
         "orbit",
-        "zenject"
+        "dependency-injection"
     ],
     "author": {
         "name": "Maarten Tegelaers",
